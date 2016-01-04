@@ -7,7 +7,6 @@ RUN conda update --all -y && \
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -y && apt-get -y upgrade && \
     apt-get install -y gcc && \
-    apt-get install -y libopenblas-base && \
     apt-get install -y libopenblas-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*

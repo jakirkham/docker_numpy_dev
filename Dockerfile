@@ -21,3 +21,5 @@ RUN git clone https://github.com/jakirkham/numpy -b opt_dot_trans_temp && \
     python setup.py build && \
     python setup.py install && \
     python setup.py clean --all
+
+WORKDIR /home

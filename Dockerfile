@@ -15,3 +15,9 @@ RUN conda install -y cython && \
     conda install -y -c nanshe openblas && \
     conda update -y -c nanshe --all && \
     conda clean -tipsy
+
+RUN git clone https://github.com/jakirkham/numpy -b opt_dot_trans_temp && \
+    cd /numpy && \
+    python setup.py build && \
+    python setup.py install && \
+    python setup.py clean --all

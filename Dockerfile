@@ -15,7 +15,7 @@ RUN conda install -y cython && \
     conda install -y ipython && \
     conda clean -tipsy
 
-RUN git clone https://github.com/jakirkham/numpy -b opt_dot_trans_temp && \
+RUN git clone https://github.com/jakirkham/numpy -b opt_dot_trans && \
     cd /numpy && \
     python setup.py build && \
     python setup.py install && \

@@ -1,22 +1,34 @@
-FROM continuumio/miniconda:latest
+FROM ubuntu:xenial
 MAINTAINER John Kirkham <jakirkham@gmail.com>
 
 
-RUN conda update --all -y && \
-    conda clean -tipsy
-
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -y && apt-get -y upgrade && \
-    apt-get install -y gcc && \
-    apt-get install -y gfortran && \
-    apt-get install -y libatlas-base-dev && \
+    apt-get install -y libreadline-dev\
+                       gcc \
+                       gfortran \
+                       python3.4-dev \
+                       python3.4-dbg \
+                       libatlas-base-dev \
+                       liblapacke-dev \
+                       curl \
+                       git \
+                       vim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN conda install -y cython && \
-    conda install -y ipython && \
-    conda clean -tipsy
+RUN ln -s /usr/bin/python3.4 /usr/bin/python && \
+    ln -s /usr/bin/python3.4-dbg /usr/bin/python3-dbg && \
+    ln -s /usr/bin/python3.4-dbg /usr/bin/python-dbg
 
-RUN git clone https://github.com/jakirkham/numpy -b opt_dot_trans && \
+RUN curl https://bootstrap.pypa.io/get-pip.py > get-pip.py && \
+    python get-pip.py && \
+    rm get-pip.py
+
+RUN pip install --no-cache-dir nose \
+                               ipython \
+                               cython
+
+RUN git clone https://github.com/numpy/numpy && \
     cd /numpy && \
     python setup.py build && \
     python setup.py install && \

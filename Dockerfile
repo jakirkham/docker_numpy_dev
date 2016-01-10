@@ -30,8 +30,8 @@ RUN pip install --no-cache-dir nose \
 
 RUN git clone https://github.com/numpy/numpy && \
     cd /numpy && \
-    python setup.py build && \
-    python setup.py install && \
+    python-dbg setup.py build --debug && \
+    python-dbg setup.py install && \
     python setup.py clean --all
 
 WORKDIR /home
